@@ -34,7 +34,7 @@ def imageUploadingCloudFlare(self, instance):
 
 class NewsAdminForm(forms.ModelForm):
     #define image upload filed
-    image_upload = forms.ImageField(required=False)
+    image_upload = forms.ImageField(required=True)
 
     class Meta:
         #define what model
@@ -91,7 +91,7 @@ class PhotoStoryAdminForm(forms.ModelForm):
 
 class SocialJournalismAdminForm(forms.ModelForm):
     #define image upload filed
-    image_upload = forms.ImageField(required=False)
+    image_upload = forms.ImageField(required=True)
 
     class Meta:
         #define what model
