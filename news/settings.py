@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "whitenoise.runserver_nostatic",
     'genaral_news.apps.GenaralNewsConfig',
-    'api.apps.ApiConfig'
+    'api.apps.ApiConfig',
+    'ckeditor'
     
 ]
 
