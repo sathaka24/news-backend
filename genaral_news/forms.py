@@ -6,10 +6,10 @@ from django.conf import settings
 
 #image uploading function for cloud-flare 
 
-def imageUploadingCloudFlare(self, instance):
-    if self.cleaned_data.get('image_upload'): #Checks if an image has been uploaded
+def imageUploadingCloudFlare(self, imagefield):
+    if self.cleaned_data.get(imagefield): #Checks if an image has been uploaded
 
-            file = self.cleaned_data['image_upload'] #Get the upload file(image)
+            file = self.cleaned_data[imagefield] #Get the upload file(image)
 
             account_id = settings.CLOUD_FLARE_ACC_ID
 
@@ -29,12 +29,12 @@ def imageUploadingCloudFlare(self, instance):
             if response.status_code == 200:
                 access_url =  response.json()['result']['variants'][0]
                 print(access_url)
-                instance.image = access_url
+                return access_url
 
 
 class NewsAdminForm(forms.ModelForm):
     #define image upload filed
-    image_upload = forms.ImageField(required=True)
+    image_upload = forms.ImageField(required=False)
 
     class Meta:
         #define what model
@@ -44,16 +44,20 @@ class NewsAdminForm(forms.ModelForm):
     def save(self, commit= True):
         instance = super().save(commit=False) # Calls super().save(commit=False) to create an instance of the model without committing it to the database yet.
 
-        imageUploadingCloudFlare(self, instance)
+        url = imageUploadingCloudFlare(self, 'image_upload')
+
+        if url:
+            instance.image = url
         
         if commit:
             instance.save()
 
         return instance
+    
 
 class FeaturesAdminForm(forms.ModelForm):
     #define image upload filed
-    image_upload = forms.ImageField(required=True)
+    image_upload = forms.ImageField(required=False)
 
     class Meta:
         #define what model
@@ -63,7 +67,10 @@ class FeaturesAdminForm(forms.ModelForm):
     def save(self, commit= True):
         instance = super().save(commit=False) # Calls super().save(commit=False) to create an instance of the model without committing it to the database yet.
 
-        imageUploadingCloudFlare(self, instance)
+        url = imageUploadingCloudFlare(self, 'image_upload')
+
+        if url:
+            instance.image = url
         
         if commit:
             instance.save()
@@ -72,7 +79,7 @@ class FeaturesAdminForm(forms.ModelForm):
 
 class PhotoStoryAdminForm(forms.ModelForm):
     #define image upload filed
-    image_upload = forms.ImageField(required=True)
+    image_upload = forms.ImageField(required=False)
 
     class Meta:
         #define what model
@@ -82,7 +89,10 @@ class PhotoStoryAdminForm(forms.ModelForm):
     def save(self, commit= True):
         instance = super().save(commit=False) # Calls super().save(commit=False) to create an instance of the model without committing it to the database yet.
 
-        imageUploadingCloudFlare(self, instance)
+        url = imageUploadingCloudFlare(self, 'image_upload')
+
+        if url:
+            instance.image = url
         
         if commit:
             instance.save()
@@ -91,7 +101,7 @@ class PhotoStoryAdminForm(forms.ModelForm):
 
 class SocialJournalismAdminForm(forms.ModelForm):
     #define image upload filed
-    image_upload = forms.ImageField(required=True)
+    image_upload = forms.ImageField(required=False)
 
     class Meta:
         #define what model
@@ -101,7 +111,10 @@ class SocialJournalismAdminForm(forms.ModelForm):
     def save(self, commit= True):
         instance = super().save(commit=False) # Calls super().save(commit=False) to create an instance of the model without committing it to the database yet.
 
-        imageUploadingCloudFlare(self, instance)
+        url = imageUploadingCloudFlare(self, 'image_upload')
+
+        if url:
+            instance.image = url
         
         if commit:
             instance.save()
@@ -110,7 +123,7 @@ class SocialJournalismAdminForm(forms.ModelForm):
 
 class SportsAdminForm(forms.ModelForm):
     #define image upload filed
-    image_upload = forms.ImageField(required=True)
+    image_upload = forms.ImageField(required=False)
 
     class Meta:
         #define what model
@@ -120,7 +133,10 @@ class SportsAdminForm(forms.ModelForm):
     def save(self, commit= True):
         instance = super().save(commit=False) # Calls super().save(commit=False) to create an instance of the model without committing it to the database yet.
 
-        imageUploadingCloudFlare(self, instance)
+        url = imageUploadingCloudFlare(self, 'image_upload')
+
+        if url:
+            instance.image = url
         
         if commit:
             instance.save()

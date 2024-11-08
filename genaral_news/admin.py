@@ -1,6 +1,12 @@
+from django.http import HttpRequest
+from django.http.response import HttpResponse
+from django.http import HttpResponseRedirect
+from django.utils.html import format_html
+from typing import Any
 from django.contrib import admin
 from .models import News, Features, SocialJournalism, Sports, PhotoStory
-from .forms import NewsAdminForm, FeaturesAdminForm, PhotoStoryAdminForm, SocialJournalismAdminForm, SportsAdminForm
+from .forms import NewsAdminForm, FeaturesAdminForm, PhotoStoryAdminForm, SocialJournalismAdminForm, SportsAdminForm, imageUploadingCloudFlare
+
 
 # Register your models here.
 
