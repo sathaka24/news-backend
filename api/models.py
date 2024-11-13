@@ -39,7 +39,8 @@ def filtering_algo(request, model):
                 if model.objects.filter(id=starting_id).exists():
                     id_list.append(starting_id)
                     count +=1
-
+                else:
+                    break
                 starting_id -= 1
         else:
             for i in range(total_row):
