@@ -38,7 +38,7 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'news-backend-production-2e5a.up.railway.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'news-backend-production-2e5a.up.railway.app', 'news.gedaratv.lk']
 
 CSRF_TRUSTED_ORIGINS = ['https://news-backend-production-2e5a.up.railway.app']
 
