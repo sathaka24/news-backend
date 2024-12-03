@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from api.models import NewsResource, SportsResource, FeaturesResource, SocialJournalismResource, PhotoStoryResource, LatestTwoResource
+from api.models import NewsResource, SportsResource, FeaturesResource, SocialJournalismResource, PhotoStoryResource, TheTruthResource, LatestTwoResource
 
 news_resource = NewsResource()
 sports_resource = SportsResource()
 features_resource = FeaturesResource()
 social_journalism_resource = SocialJournalismResource()
 photo_story_resource = PhotoStoryResource()
+the_truth = TheTruthResource()
 latest_two = LatestTwoResource()
 
 urlpatterns = [
@@ -32,5 +33,6 @@ urlpatterns = [
     path('api/', include(features_resource.urls)),
     path('api/', include(social_journalism_resource.urls)),
     path('api/', include(photo_story_resource.urls)),
+    path('api/', include(the_truth.urls)),
     path('api/', include(latest_two.urls))
 ]
