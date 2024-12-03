@@ -2,7 +2,7 @@ from django.db import models
 from tastypie.resources import ModelResource, Resource
 from tastypie.exceptions import BadRequest
 from tastypie.fields import CharField, DateField, IntegerField
-from genaral_news.models import News, Sports, SocialJournalism, Features, PhotoStory
+from genaral_news.models import News, Sports, SocialJournalism, Features, PhotoStory, TheTruth
 # Create your models here.
 
 #filetring algorithem
@@ -138,6 +138,20 @@ class PhotoStoryResource(ModelResource):
         applicable_filters['id__in'] = id_list
 
         return super().apply_filters(request, applicable_filters).order_by('-id')
+    
+#-------------------------TheTruth-----------------------------
+class TheTruthResource(ModelResource):
+    class Meta:
+        queryset = TheTruth.objects.all()
+        resource_name = "the_truth"
+    
+    #under this filter data
+    def apply_filters(self, request, applicable_filters):
+
+        id_list = filtering_algo(request, TheTruth)
+        applicable_filters['id__in'] = id_list
+
+        return super().apply_filters(request, applicable_filters).order_by('-id')
 
 
 #---------getting-latest-two-news-from-each-category----------------------
@@ -169,7 +183,7 @@ class LatestTwoResource(Resource):
     def get_object_list(self, request):
         
         news_data = News.objects.order_by('-id')[:2]
-        sports_data = Sports.objects.order_by('-id')[:2]
+        the_truth = TheTruth.objects.order_by('-id')[:2]
         socialj_data = SocialJournalism.objects.order_by('-id')[:2]
         features_data = Features.objects.order_by('-id')[:2]
         photostory_data = PhotoStory.objects.order_by('-id')[:2]
@@ -181,9 +195,9 @@ class LatestTwoResource(Resource):
                 DataObject(object.id, object.heading, object.date, object.image, "genaral_news") #<----------------
             )
 
-        for object in sports_data:
+        for object in the_truth:
             combined_data.append(
-                DataObject(object.id, object.heading, object.date, object.image, "sports") #<----------------
+                DataObject(object.id, object.heading, object.date, object.image, "the_truth") #<----------------
             )
         for object in socialj_data:
             combined_data.append(

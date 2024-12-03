@@ -32,3 +32,9 @@ class Sports(models.Model):
     heading = models.CharField(max_length=255, null=True, blank=True)
     date = models.DateField() #<---------
     image = models.CharField(max_length=255, null=True, blank=True)
+
+class TheTruth(models.Model):
+    content = RichTextField()
+    heading = models.CharField(max_length=255, null=True, blank=True)
+    date = models.DateField() #<---------
+    image = models.CharField(max_length=255, null=True, blank=True)

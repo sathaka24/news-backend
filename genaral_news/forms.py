@@ -1,7 +1,7 @@
 from typing import Any
 from django import forms
 import requests
-from .models import News, Features, PhotoStory, SocialJournalism, Sports
+from .models import News, Features, PhotoStory, SocialJournalism, Sports, TheTruth
 from django.conf import settings
 
 #image uploading function for cloud-flare 
@@ -128,6 +128,28 @@ class SportsAdminForm(forms.ModelForm):
     class Meta:
         #define what model
         model = Sports
+        fields = ['content', 'heading', 'date', 'image'] # Specify model fields to be included in the form
+    
+    def save(self, commit= True):
+        instance = super().save(commit=False) # Calls super().save(commit=False) to create an instance of the model without committing it to the database yet.
+
+        url = imageUploadingCloudFlare(self, 'image_upload')
+
+        if url:
+            instance.image = url
+        
+        if commit:
+            instance.save()
+
+        return instance
+
+class TheTruthAdminForm(forms.ModelForm):
+    #define image upload filed
+    image_upload = forms.ImageField(required=False)
+
+    class Meta:
+        #define what model
+        model = TheTruth
         fields = ['content', 'heading', 'date', 'image'] # Specify model fields to be included in the form
     
     def save(self, commit= True):
